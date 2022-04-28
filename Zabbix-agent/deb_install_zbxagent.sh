@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 read -p "Entrez l'adresse ip du serveur Zabbix: " SERVER_IP
 
 function install_docker ()
@@ -69,10 +71,14 @@ docker-compose up -d
 rm docker-compose.yml
 mv docker-compose.yml.bck docker-compose.yml
 
+echo ""
+docker container ls
+echo""
+
 echo "--------------------------------------------------------------------------------------------"
 echo ""
-echo "                                   Hostname : $HOSTNAME                "
+echo "                                   Hostname : $HOSTNAME                                     "
 echo ""
-echo "               Clé PSK : $PSK                       "
+echo "               Clé PSK : $PSK                                                               "
 echo ""
 echo "--------------------------------------------------------------------------------------------"

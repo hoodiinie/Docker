@@ -4,7 +4,7 @@ clear
 tput setaf 7; read -p "Entrez le mot de passe pour la base de données Zabbix : " DB_PASSWORD
 tput setaf 2; echo ""
 
-addr_ip=$(hostname -I)
+addr_ip=$(hostname -I | awk '{print $1}')
 
 
 function install_docker ()

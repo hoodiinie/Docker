@@ -41,7 +41,9 @@ function data ()
 cp docker-compose.yml docker-compose.yml.bck
 
 # Modification et lancement du docker-compose.yml
-FILE="~/Docker/Zabbix/docker-compose.yml"
+
+FILE=~/Docker/Zabbix/docker-compose.yml
+
 sed -i -e "s/DB_PASSWORD/$DB_PASSWORD/g" "$FILE"
 
 data

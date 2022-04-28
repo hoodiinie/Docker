@@ -6,7 +6,6 @@ tput setaf 2; echo ""
 
 addr_ip=$(hostname -I | awk '{print $1}')
 
-
 function install_docker ()
 {
     tput setaf 6; echo ""
@@ -39,8 +38,6 @@ function data ()
 }
 
 cp docker-compose.yml docker-compose.yml.bck
-
-# Modification et lancement du docker-compose.yml
 
 FILE=~/Docker/Zabbix/docker-compose.yml
 

@@ -21,29 +21,15 @@ function install_docker ()
     tput setaf 7; echo ""
 }
 
-function data ()
+function chg_passwd ()
 {
-        if [[ ! -e /apps ]]
-        then
-                mkdir /apps
-
-                if [[ ! -e /apps/zabbix ]]
-                then
-                    mkdir /apps/zabbix
-                    mkdir /apps/zabbix/db
-                    mkdir /apps/zabbix/srv
-                    mkdir /apps/zabbix/alertscripts
-                fi
-        fi
+	cp docker-compose.yml docker-compose.yml.bck
+	FILE=~/Docker/Zabbix/docker-compose.yml
+	sed -i -e "s/DB_PASSWORD/$DB_PASSWORD/g" "$FILE"
 }
 
-cp docker-compose.yml docker-compose.yml.bck
 
-FILE=~/Docker/Zabbix/docker-compose.yml
-
-sed -i -e "s/DB_PASSWORD/$DB_PASSWORD/g" "$FILE"
-
-data
+chg_passwd
 install_docker
 docker-compose up -d
 

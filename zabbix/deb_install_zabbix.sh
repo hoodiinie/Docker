@@ -37,9 +37,48 @@ function chg_passwd ()
 	sed -i -e "s/DB_PASSWORD/$DB_PASSWORD/g" "$FILE"
 }
 
+function crypto ()
+{
+        FILE_PSK=/apps/zabbix/agent/psk/secret.psk
+        if [[ ! -e /apps ]]
+        then
+                mkdir /apps
+        fi
+
+        if [[ ! -e /apps/zabbix ]]
+        then
+                mkdir /apps/zabbix
+        fi
+
+        if [[ ! -e /apps/zabbix/agent ]]
+        then
+                mkdir /apps/zabbix/agent
+        fi
+
+        if [[ ! -e /apps/zabbix/agent/psk ]]
+        then
+                mkdir /apps/zabbix/agent/psk
+        fi
+
+
+        if [[ ! -e "$FILE_PSK" ]]
+        then
+                echo "Création fichier $FILE_PSK..."
+                touch $FILE_PSK
+
+                openssl rand -hex 32 > $FILE_PSK
+                PSK=$(cat $FILE_PSK)
+
+        else
+                PSK=$(cat $FILE_PSK)
+
+        fi
+}
+
 
 chg_passwd
 install_docker
+crypto
 docker-compose up -d
 
 rm docker-compose.yml

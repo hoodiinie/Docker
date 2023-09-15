@@ -39,7 +39,7 @@ function chg_passwd ()
 
 function crypto ()
 {
-        FILE_PSK=/apps/zabbix/agent/psk/secret.psk
+        FILE_PSK=/apps/zabbix/agent/psk/key.psk
         if [[ ! -e /apps ]]
         then
                 mkdir /apps
@@ -93,5 +93,7 @@ tput setaf 7; echo ""
 tput setaf 7; echo "   Adresse du serveur Zabbix : http://$addr_ip:8080/     "
 tput setaf 7; echo "         ID : Admin / MDP : zabbix             "
 tput setaf 7; echo ""
+tput setaf 7; echo "                 PSK Identity : zabbix           "
+tput setaf 7; echo "       PSK key : $PSK                            "
 tput setaf 7; echo "-------------------------------------------------"
 tput setaf 2; echo ""

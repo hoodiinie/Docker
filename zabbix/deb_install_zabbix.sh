@@ -33,7 +33,7 @@ function install_docker ()
 function chg_passwd ()
 {
 	cp docker-compose.yml docker-compose.yml.bck
-	FILE=~/Docker/Zabbix/docker-compose.yml
+	FILE=~/Docker/zabbix/docker-compose.yml
 	sed -i -e "s/DB_PASSWORD/$DB_PASSWORD/g" "$FILE"
 }
 

@@ -34,7 +34,7 @@ services:
       - wiki
 
 volumes:
-  db-data:
+  dbwiki:
 
 networks:
   wiki:

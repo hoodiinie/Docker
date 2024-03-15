@@ -30,11 +30,14 @@ services:
       DB_USER: ${DBUSER}
       DB_PASS: ${DBPASS}
       DB_NAME: ${DBNAME}
+    volumes:
+      - wikidata:/data
     networks:
       - wiki
 
 volumes:
   dbwiki:
+  wikidata:
 
 networks:
   wiki:

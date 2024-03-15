@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+
+  kanboard:
+    image: kanboard/kanboard
+    restart: unless-stopped
+    container_name: ${NAME}
+    depends_on:
+      - dbkb
+    ports:
+      - "${PORTS}:80"
+    volumes:
+      - kanboard:/var/www/app
+    networks:
+      - kanboard
+
+  dbkb:
+    image: postgres
+    restart: unless-stopped
+    container_name: ${NAMEDB}
+    environment:
+      POSTGRES_USER: ${DBUSER}
+      POSTGRES_PASSWORD: ${DBPASS}
+      POSTGRES_DB: ${DBNAME}
+    volumes:
+      - dbkb:/var/lib/postgresql/data
+    networks:
+      - kanboard
+
+volumes:
+  kanboard:
+  dbkb:
+
+networks:
+  kanboard:

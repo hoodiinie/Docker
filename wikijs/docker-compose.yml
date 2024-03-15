@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: ${DBPASS}
       POSTGRES_DB: ${DBNAME}
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - dbwiki:/var/lib/postgresql/data
     networks:
       - wiki
 

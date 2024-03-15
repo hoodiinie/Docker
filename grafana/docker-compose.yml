@@ -1,13 +1,17 @@
-version: '3'
+version: '3.8'
+
 services:
+
   grafana:
-    image: grafana/grafana-oss:8.5.4
-    restart: always
-    container_name: grafana
+    image: grafana/grafana-oss
+    restart: unless-stopped
+    container_name: ${NAME}
+    ports:
+      - 3000:3000
     environment:
       - GF_INSTALL_PLUGINS=alexanderzobnin-zabbix-app
     volumes:
-      - /apps/grafana:/var/lib/grafana
-    ports:
-      - 3000:3000
-    user: 'root'
+      - grafana:/var/lib/grafana
+
+volumes:
+  grafana:

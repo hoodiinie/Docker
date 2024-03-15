@@ -7,9 +7,9 @@ services:
     restart: unless-stopped
     container_name: ${NAME}
     ports:
-      - ${PORT}:3000
+      - ${PORTS}:3000
     environment:
-      - GF_INSTALL_PLUGINS=alexanderzobnin-zabbix-app
+      - GF_INSTALL_PLUGINS=${PLUGINS}
     volumes:
       - grafana:/var/lib/grafana
 

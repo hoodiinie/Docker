@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     container_name: ${NAME}
     ports:
-      - 3000:3000
+      - ${PORT}:3000
     environment:
       - GF_INSTALL_PLUGINS=alexanderzobnin-zabbix-app
     volumes:

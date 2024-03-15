@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+
+  postgres-server:
+    image: postgres
+    restart: unless-stopped
+    container_name: ${NAMEDB}
+    environment:
+      POSTGRES_USER: ${DBUSER}
+      POSTGRES_PASSWORD: ${DBPASS}
+      POSTGRES_DB: ${DBNAME}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - wiki
+
+  wikijs:
+    image: requarks/wiki
+    restart: unless-stopped
+    container_name: ${NAME}
+    depends_on:
+      - ${NAMEDB}
+    ports:
+      - 3000:3000
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: ${NAMEDB}
+      DB_PORT: 5432
+      DB_USER: ${DBUSER}
+      DB_PASS: ${DBPASS}
+      DB_NAME: ${DBNAME}
+    networks:
+      - wiki
+
+volumes:
+  db-data:
+
+networks:
+  wiki:

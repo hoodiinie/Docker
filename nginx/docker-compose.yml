@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+
+  nginx:
+    image: nginx
+    restart: unless-stopped
+    container_name: ${NAME}
+    ports:
+      - ${PORT}:80
+    volumes:
+      - /apps/${NAME}/data:/var/www/html
+      - /apps/${NAME}/conf:/etc/nginx/sites-enabled

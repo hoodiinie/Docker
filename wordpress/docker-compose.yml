@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: unless-stopped
+    container_name: ${NAME}
+    ports:
+      - ${PORT}:80
+    depends_on:
+      - ${NAMEDB}
+    environment:
+      WORDPRESS_DB_HOST: ${NAMEDB}
+      WORDPRESS_DB_USER: ${DBUSER}
+      WORDPRESS_DB_PASSWORD: ${DBPASS}
+      WORDPRESS_DB_NAME: ${DBNAME}
+    volumes:
+      - /apps/${NAME}/data:/var/www/html
+    networks:
+      - wordpress
+
+  web01_db:
+    image: mariadb
+    restart: unless-stopped
+    container_name: ${NAMEDB}
+    environment:
+      MARIADB_DATABASE: ${DBNAME}
+      MARIADB_USER: ${DBUSER}
+      MARIADB_PASSWORD: ${DBPASS}
+      MARIADB_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - /apps/${NAME}/db:/var/lib/mysql
+    networks:
+      - wordpress
+
+networks:
+  wordpress:
